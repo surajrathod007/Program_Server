@@ -48,7 +48,7 @@ fun Application.module(testing: Boolean = false) {
 
 
         get("/") {
-            call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
+            call.respondText("HELLO WORLD! Cool ", contentType = ContentType.Text.Plain)
         }
 
         get<MyLocation> {
