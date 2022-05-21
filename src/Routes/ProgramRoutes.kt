@@ -15,8 +15,9 @@ const val API_VERSION = "/v1"
 const val PROGRAMS = "$API_VERSION/programs"
 const val ADD_PROGRAM = "$PROGRAMS/add"
 const val SPECIFIC = "$PROGRAMS/specific"
-const val UPDATE = "$API_VERSION/update"
+const val UPDATE = "$API_VERSION/change"
 const val ADD = "$API_VERSION/update"
+const val GETUPDATE = "$API_VERSION/get"
 
 
 @Location(ADD_PROGRAM)
@@ -34,10 +35,24 @@ class UpdateApp
 @Location(ADD)
 class AddUpdate
 
+@Location(GETUPDATE)
+class GetUpdate
+
 
 fun Route.ProgramRoute(
     db : repo
 ){
+
+
+    get<GetUpdate>{
+
+        val update = db.getUpdate()
+        call.respond(
+            HttpStatusCode.OK,update
+        )
+    }
+
+
 
 
 

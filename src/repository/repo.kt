@@ -61,6 +61,12 @@ class repo {
         }
     }
 
+    suspend fun getUpdate() : List<Update?> = dbQuery {
+        UpdateTable.select {
+            UpdateTable.id.eq(1)
+        }.map { rowToUpdate(it) }
+    }
+
 
     //util fucntion to convert a table row to an object
     private fun rowToProgram(row : ResultRow?):Program?{
@@ -76,6 +82,23 @@ class repo {
             sem = row[ProgramTable.sem],
             sub = row[ProgramTable.sub],
             unit = row[ProgramTable.unit]
+        )
+
+
+    }
+
+    private fun rowToUpdate(row : ResultRow?):Update?{
+        if(row==null)
+        {
+            return null
+        }
+
+        return Update(
+            id = row[UpdateTable.id],
+            version = row[UpdateTable.version],
+            link = row[UpdateTable.link],
+            message = row[UpdateTable.message],
+
         )
 
 
