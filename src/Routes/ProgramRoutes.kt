@@ -48,7 +48,7 @@ fun Route.ProgramRoute(
 
         val update = db.getUpdate()
         call.respond(
-            HttpStatusCode.OK,update
+            HttpStatusCode.OK,update!!
         )
     }
 

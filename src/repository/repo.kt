@@ -61,10 +61,10 @@ class repo {
         }
     }
 
-    suspend fun getUpdate() : List<Update?> = dbQuery {
+    suspend fun getUpdate() : Update? = dbQuery {
         UpdateTable.select {
             UpdateTable.id.eq(1)
-        }.map { rowToUpdate(it) }
+        }.map { rowToUpdate(it) }.singleOrNull()
     }
 
 
