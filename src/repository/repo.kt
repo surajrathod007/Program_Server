@@ -27,6 +27,17 @@ class repo {
         }
     }
 
+    suspend fun changeUpdate(update : Update){
+        dbQuery {
+            UpdateTable.update{ uTable->
+
+                uTable[UpdateTable.version] = update.version
+                uTable[UpdateTable.link] = update.link
+                uTable[UpdateTable.message] = update.message
+
+            }
+        }
+    }
 
     suspend fun addProgram(program : Program){
         dbQuery{

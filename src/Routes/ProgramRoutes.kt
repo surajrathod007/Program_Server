@@ -44,6 +44,33 @@ fun Route.ProgramRoute(
 ){
 
 
+    post<UpdateApp>{
+
+        val updateRequest = try{
+            call.receive<Update>()
+        }catch (e : Exception)
+        {
+            call.respond(HttpStatusCode.BadRequest,SimpleResponse(false,"missing fields"))
+            return@post
+        }
+
+        //add update
+        try{
+
+            val update = Update(updateRequest.id,updateRequest.version,updateRequest.link,updateRequest.message)
+
+            db.changeUpdate(update)
+            call.respond(HttpStatusCode.OK,SimpleResponse(true,"Update added!"))
+
+        }catch (e : Exception)
+        {
+            call.respond(HttpStatusCode.Conflict,SimpleResponse(false,e.message ?: "Some problem ocuured"))
+        }
+
+
+
+    }
+
     get<GetUpdate>{
 
         val update = db.getUpdate()
