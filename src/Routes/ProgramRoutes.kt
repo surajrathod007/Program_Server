@@ -4,6 +4,7 @@ import com.example.data.model.Program
 import com.example.data.model.SimpleResponse
 import com.example.data.model.Update
 import com.example.repository.repo
+import com.example.semReqCount
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.locations.*
@@ -127,7 +128,8 @@ fun Route.ProgramRoute(
         val sub = call.request.queryParameters["sub"]
         val unit = call.request.queryParameters["unit"]
 
-
+        // Semester Query Request Counter
+        semReqCount[(sem!!.toInt() -1)]+=1
 
         val program = db.getSpecificProgram(sem!!,sub!!,unit!!)
 
@@ -157,10 +159,11 @@ fun Route.ProgramRoute(
 
         try{
 
-            val program = Program(programRequest.id,
-            programRequest.title,
-            programRequest.content,programRequest.sem,
+            val program = Program(programRequest.content,
+                programRequest.id,
+            programRequest.sem,
             programRequest.sub,
+                programRequest.title,
             programRequest.unit)
 
             db.addProgram(program)

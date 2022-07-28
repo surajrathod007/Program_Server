@@ -14,7 +14,7 @@ import io.ktor.gson.*
 import io.ktor.features.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
-
+var semReqCount = arrayOf(0,0,0,0,0,0)
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
@@ -22,6 +22,8 @@ fun Application.module(testing: Boolean = false) {
     //initialse databse
 
     DatabaseFactory.init()
+
+    var totalReq = 0
 
     val db = repo()
 
@@ -50,7 +52,12 @@ fun Application.module(testing: Boolean = false) {
         get("/") {
             call.respondText("HELLO WORLD! Cool ", contentType = ContentType.Text.Plain)
         }
+        get("/stats"){
+            for (i in semReqCount.indices){
+                call.respondText("Sem ${i+1} : ${semReqCount[i]}\n")
+            }
 
+        }
         get<MyLocation> {
             call.respondText("Location: name=${it.name}, arg1=${it.arg1}, arg2=${it.arg2}")
         }
