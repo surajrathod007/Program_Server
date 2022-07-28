@@ -66,6 +66,7 @@ class repo {
         }
     }
 
+
     suspend fun getAllProgram() : List<Program?> = dbQuery {
         ProgramTable.selectAll().map{
             rowToProgram(it)
