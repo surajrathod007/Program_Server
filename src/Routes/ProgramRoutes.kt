@@ -159,12 +159,11 @@ fun Route.ProgramRoute(
 
         try{
 
-            val program = Program(programRequest.content,
-                programRequest.id,
-            programRequest.sem,
-            programRequest.sub,
-                programRequest.title,
-            programRequest.unit)
+            val program = Program(id = programRequest.id,
+            title = programRequest.title,
+            content = programRequest.content, sem = programRequest.sem,
+            sub = programRequest.sub,
+            unit = programRequest.unit)
 
             db.addProgram(program)
             call.respond(HttpStatusCode.OK,SimpleResponse(true,"Program added!"))
