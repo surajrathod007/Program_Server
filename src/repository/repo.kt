@@ -59,15 +59,16 @@ class repo {
 
     suspend fun plus(id : Int){
         var c = getCount(id)
-        var count = 0
+        var count = 1
         if(c != null) {
 
             count = c.count
         }
-        count= 10
+        count++
+        //count= 10
         dbQuery {
-            VisitCountTable.update({VisitCountTable.id eq 1}){table ->
-                table[VisitCountTable.count] = 100
+            VisitCountTable.update({VisitCountTable.id eq id}){table ->
+                table[VisitCountTable.count] = count
             }
         }
     }
