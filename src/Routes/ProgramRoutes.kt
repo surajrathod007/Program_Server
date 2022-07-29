@@ -130,13 +130,12 @@ fun Route.ProgramRoute(
 
         var s = sem?.get(4)?.toInt()
 
-        if(s == null)
-            s = 1
+
 
         // Semester Query Request Counter
        // semReqCount[(sem!!.toInt() -1)]+=1
 
-        db.plus(4)
+        db.plus(s!!)
 
 
         val program = db.getSpecificProgram(sem!!,sub!!,unit!!)
