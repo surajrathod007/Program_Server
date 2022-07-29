@@ -151,9 +151,10 @@ fun Route.ProgramRoute(
             "Sem 5" -> {
                 db.plus(5)
             }
-            "Sem 5" -> {
+            "Sem 6" -> {
                 db.plus(6)
             }
+
         }
 
 
