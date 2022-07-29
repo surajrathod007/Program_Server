@@ -66,8 +66,8 @@ class repo {
         }
         count= 10
         dbQuery {
-            VisitCountTable.update({VisitCountTable.id eq id}){table ->
-                table[VisitCountTable.count] = count
+            VisitCountTable.update({VisitCountTable.id eq 1}){table ->
+                table[VisitCountTable.count] = 100
             }
         }
     }
