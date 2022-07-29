@@ -2,6 +2,7 @@ package com.example.repository
 
 import com.example.data.table.ProgramTable
 import com.example.data.table.UpdateTable
+import com.example.data.table.VisitCountTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ object DatabaseFactory {
         transaction {
             SchemaUtils.create(ProgramTable)
             SchemaUtils.create(UpdateTable)
+            SchemaUtils.create(VisitCountTable)
         }
     }
 
