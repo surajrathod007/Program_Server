@@ -128,7 +128,7 @@ fun Route.ProgramRoute(
         val sub = call.request.queryParameters["sub"]
         val unit = call.request.queryParameters["unit"]
 
-        var s = sem?.get(5)?.toInt()
+        var s = sem?.get(3)?.toInt()
 
 
 
