@@ -4,7 +4,6 @@ import com.example.data.model.Program
 import com.example.data.model.SimpleResponse
 import com.example.data.model.Update
 import com.example.repository.repo
-import com.example.semReqCount
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.locations.*

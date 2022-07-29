@@ -1,6 +1,7 @@
 package com.example
 
 import com.example.Routes.ProgramRoute
+import com.example.data.table.VisitCountTable
 import com.example.repository.DatabaseFactory
 import com.example.repository.repo
 import io.ktor.application.*
@@ -12,9 +13,10 @@ import io.ktor.locations.*
 import io.ktor.sessions.*
 import io.ktor.gson.*
 import io.ktor.features.*
+import org.jetbrains.exposed.sql.selectAll
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
-var semReqCount = arrayOf(0,0,0,0,0,0)
+
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
@@ -53,9 +55,15 @@ fun Application.module(testing: Boolean = false) {
             call.respondText("HELLO WORLD! Cool ", contentType = ContentType.Text.Plain)
         }
         get("/stats"){
-            for (i in semReqCount.indices){
+            /*for (i in semReqCount.indices){
                 call.respondText("Sem ${i+1} : ${semReqCount[i]}\n")
+            }*/
+            // May be expensive since 6 times traversing through the table
+            for(i in 1 until 7){
+                call.respondText("${db.getCount(i)}")
             }
+            // Should print complete table
+           call.respondText( "${VisitCountTable.selectAll()}")
 
         }
         get<MyLocation> {
